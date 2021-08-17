@@ -27,6 +27,14 @@ int Game::getWindowHeight() {
     return this->window_height;
 }
 
+void Game::update() {
+    
+}
+
+void Game::draw() {
+
+}
+
 void Game::run() {
 
     while (this->window.isOpen()) {
@@ -44,7 +52,10 @@ void Game::run() {
             }
         }
 
+        Game::update();
+
         this->window.clear();
+        Game::draw();
         this->window.display();
     }
 }

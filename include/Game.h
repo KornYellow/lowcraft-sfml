@@ -21,4 +21,6 @@ class Game {
         int getWindowHeight();
 
         void run();
+        void update();
+        void draw();
 };
