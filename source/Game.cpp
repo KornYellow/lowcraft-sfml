@@ -9,7 +9,7 @@ using namespace std;
 using namespace sf;
 
 Game::Game(int window_width, int window_height):
-window(VideoMode(window_width, window_height), "Lowcraft 1.0.0", Style::Close) {
+window(VideoMode(window_width, window_height), "Lowcraft - 1.0.0", Style::Close) {
 
     this->window_width = window_width;
     this->window_height = window_height;

@@ -4,11 +4,10 @@
 
 using namespace std;
 
-Game game(1280, 720);
+Game game(1080, 720);
 
 int main() {
 
     game.run();
-
     return 0;
 }
