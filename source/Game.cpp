@@ -9,12 +9,12 @@ using namespace std;
 using namespace sf;
 
 Game::Game(int window_width, int window_height):
-window(VideoMode(window_width, window_height), "Lowcraft - 1.0.0", Style::Close) {
+window(VideoMode(window_width, window_height), "Lowcraft -- 1.0.0", Style::Close) {
 
     this->window_width = window_width;
     this->window_height = window_height;
 
-    cout << "Camera initialized with dimension of (" << window_width << "x" << window_height << ")." << endl;
+    cout << "Game initialized with a dimension of " << window_width << " by " << window_height << "." << endl;
 }
 
 int Game::getWindowWidth() {
@@ -37,10 +37,10 @@ void Game::draw() {
 
 void Game::run() {
 
-    while (this->window.isOpen()) {
+    while(this->window.isOpen()) {
         
         Event event;
-        while (this->window.pollEvent(event)) {
+        while(this->window.pollEvent(event)) {
             
             switch(event.type) {
                 

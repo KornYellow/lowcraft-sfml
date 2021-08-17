@@ -17,7 +17,7 @@ class Game {
     
         Game(int window_width, int window_height);
         
-        int getWindowWidth();
+        int getWindowWidth();   
         int getWindowHeight();
 
         void run();
