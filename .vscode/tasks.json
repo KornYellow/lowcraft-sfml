@@ -7,9 +7,10 @@
 			"command": "/usr/bin/g++",
 			"args": [
 				"-g",
-				"${workspaceFolder}/src/main.cpp",
+				"${workspaceFolder}/main.cpp",
+				"${workspaceFolder}/source/*.cpp",
 				"-o",
-				"${workspaceFolder}/src/main",
+				"${workspaceFolder}/main",
 				"-I${workspaceFolder}",
 				"-lsfml-graphics",
 				"-lsfml-window",

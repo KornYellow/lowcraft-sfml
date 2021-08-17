@@ -67,7 +67,8 @@
         "valarray": "cpp",
         "variant": "cpp",
         "codecvt": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "source_location": "cpp"
     },
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
 }
