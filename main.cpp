@@ -1,12 +1,14 @@
 #include <iostream>
 
-#include "include/Camera.h"
+#include "include/Game.h"
 
 using namespace std;
 
-Camera camera(1920, 1080);
-int main()
-{
-    cout << "hey" << endl;
+Game game(1280, 720);
+
+int main() {
+
+    game.run();
+
     return 0;
 }

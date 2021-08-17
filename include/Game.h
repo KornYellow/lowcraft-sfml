@@ -5,7 +5,7 @@
 
 using namespace sf;
 
-class Camera {
+class Game {
 
     private:
 
@@ -15,7 +15,7 @@ class Camera {
 
     public:
     
-        Camera(int window_width, int window_height);
+        Game(int window_width, int window_height);
         
         int getWindowWidth();
         int getWindowHeight();
