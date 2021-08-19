@@ -1,9 +1,8 @@
 
 MODULE
     
-    - Room.cpp
-        - Instance.cpp <= (Object.cpp)
-        - 
-    
-    - Object.cpp (Asset)
-        - Sprite.cpp (Asset)
+    - Game
+        - Room
+            - Instance -> Object
+                       -> Audio
+                       -> Sprite

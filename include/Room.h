@@ -5,16 +5,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include "include/Game.h"
-
 using namespace std;
 using namespace sf;
 
 class Room {
 
     private:
-
-        Game* game;
 
         int room_id;
         string room_name;

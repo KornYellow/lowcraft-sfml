@@ -15,6 +15,51 @@ window(VideoMode(window_width, window_height), "Lowcraft -- 1.0.0", Style::Close
     this->window_height = window_height;
 
     cout << "Game initialized with a dimension of " << window_width << " by " << window_height << "." << endl;
+    
+    this->selected_room = 0;
+}
+
+void Game::update() {
+    
+}
+
+void Game::draw() {
+
+}
+
+void Game::addRoom(Room room) {
+
+    this->rooms.push_back(room);
+}
+
+void Game::setSelectedRoom(int index) {
+    
+    this->selected_room = index;
+}
+
+int Game::getSelectedRoom() {
+    
+    return this->selected_room;
+}
+
+Room Game::getRoom(int index) {
+
+    return this->rooms.at(index);
+}
+
+Room Game::getFirstRoom() {
+
+    return this->rooms.at(0);
+}
+
+Room Game::getLastRoom() {
+
+    return this->rooms.at(this->rooms.size() - 1);
+}
+
+vector <Room> Game::getRooms() {
+
+    return this->rooms;
 }
 
 int Game::getWindowWidth() {
@@ -25,14 +70,6 @@ int Game::getWindowWidth() {
 int Game::getWindowHeight() {
 
     return this->window_height;
-}
-
-void Game::update() {
-    
-}
-
-void Game::draw() {
-
 }
 
 void Game::run() {

@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include "include/Game.h"
 #include "include/Room.h"
 
 using namespace std;
@@ -16,7 +15,7 @@ Room::Room(string room_name, int room_id, int room_width, int room_height) {
     this->room_width = room_width;
     this->room_height = room_height;
 
-    cout << "Room " << room_name << " with an index of " << room_id << "." << endl;
+    cout << "Room " << room_name << " created with an index of # " << room_id << "." << endl;
 }
 
 int Room::getRoomID() {
