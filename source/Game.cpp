@@ -15,8 +15,6 @@ window(VideoMode(window_width, window_height), "Lowcraft -- 1.0.0", Style::Close
     this->window_height = window_height;
 
     cout << "Game initialized with a dimension of " << window_width << " by " << window_height << "." << endl;
-    
-    this->selected_room = 0;
 }
 
 void Game::update() {
@@ -74,25 +72,42 @@ int Game::getWindowHeight() {
 
 void Game::run() {
 
-    while(this->window.isOpen()) {
-        
-        Event event;
-        while(this->window.pollEvent(event)) {
+    //Select room
+    Game::setSelectedRoom(-1);
+    if(Game::getRooms().size() != 0) {
+
+        Game::setSelectedRoom(0);
+        Room room = Game::getRoom(Game::getSelectedRoom());
+        cout << "Room " << room.getRoomName() << " (" << room.getRoomID() << ") selected." << endl;
+    }
+
+    //Run the game loop
+    if(Game::getSelectedRoom() != -1) {
+
+        while(this->window.isOpen()) {
             
-            switch(event.type) {
+            Event event;
+            while(this->window.pollEvent(event)) {
                 
-                case Event::Closed :
-                    this->window.close();
-                    break;
+                switch(event.type) {
+                    
+                    case Event::Closed :
+                        this->window.close();
+                        break;
 
-                default : break;
+                    default : break;
+                }
             }
+
+            Game::update();
+
+            this->window.clear();
+            Game::draw();
+            this->window.display();
         }
+    }
+    else {
 
-        Game::update();
-
-        this->window.clear();
-        Game::draw();
-        this->window.display();
+        cout << "Cannot run the game, because cannot find any room." << endl;
     }
 }
