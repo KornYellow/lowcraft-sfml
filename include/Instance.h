@@ -17,8 +17,6 @@ class Instance {
         string object_name;
 
         //General
-        double x;
-        double y;
         bool is_visible;
 
         //Movement and Position
@@ -37,8 +35,17 @@ class Instance {
         int sprite_width;
         int sprite_height;
 
+        //Keyboard
+        vector <bool> is_key_pressed;
+
     public:
         
+        //General
+        double x;
+        double y;
+        
+        Instance(): is_key_pressed(999) {}
+
         //Object
         string getObjectName();
         void setObjectName(string object_name);
@@ -54,15 +61,17 @@ class Instance {
         void setRenderWindow(RenderWindow* window); 
 
         //Instances functions
-        void create();
-        void update();
-        void draw();
+        virtual void create();
+        virtual void update();
+        virtual void draw();
 
         void drawSelf();
         void setOrigin(double x, double y);
 
         //Movement and Position functions
         void setPosition(double x, double y);
-        double getX();
-        double getY();
+
+        //Keyboard
+        bool keyboardCheck(Keyboard::Key key);
+        bool keyboardCheckPressed(Keyboard::Key key);
 };

@@ -25,7 +25,7 @@ class Object {
         RenderWindow* window;
 
         //Instances
-        vector <Instance> instances;
+        vector <Instance*> instances;
 
     public: Object(string object_name, RenderWindow* window);
 
@@ -38,8 +38,8 @@ class Object {
         void setRenderWindow(RenderWindow* window);
 
         //Instance functions
-        void addInstance(Instance instance);
-        Instance getInstance(int index);
+        void addInstance(Instance* instance);
+        Instance* getInstance(int index);
         
         //Object functions
         void update();

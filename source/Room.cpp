@@ -19,7 +19,7 @@ void Room::update() {
 
     for(int i = 0; i < this->objects.size(); i++) {
 
-        this->objects.at(i).update();
+        this->objects.at(i)->update();
     }
 }
 
@@ -27,18 +27,18 @@ void Room::draw() {
 
     for(int i = 0; i < this->objects.size(); i++) {
 
-        this->objects.at(i).draw();
+        this->objects.at(i)->draw();
     }
 }
 
-void Room::addObject(Object object) {
+void Room::addObject(Object* object) {
 
-    object.setRoomName(this->room_name);
-    object.setRenderWindow(this->window);
+    object->setRoomName(this->room_name);
+    object->setRenderWindow(this->window);
     this->objects.push_back(object);
 }
 
-Object Room::getObject(int index) {
+Object* Room::getObject(int index) {
 
     return this->objects.at(index);
 }

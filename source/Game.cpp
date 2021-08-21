@@ -13,7 +13,10 @@ using namespace sf;
 
 Game::Game(int window_width, int window_height) : 
 window(VideoMode(window_width, window_height), "Lowcraft -- 1.0.0", Style::Close),
-room("rm_Game", &this->window) {
+room("rm_Game", &this->window), 
+object("obj_Player", &this->window) {
+
+    window.setFramerateLimit(75);
 
     this->window_width = window_width;
     this->window_height = window_height;
@@ -22,13 +25,9 @@ room("rm_Game", &this->window) {
 
 void Game::create() {
 
-    Object object("obj_Player", &this->window);
-
-    Player player;
-    player.setPosition(32, 32);
-    
-    object.addInstance(player);
-    this->room.addObject(object);
+    this->player.setPosition(32, 32);
+    this->object.addInstance(&this->player);
+    this->room.addObject(&this->object);
 }
 
 void Game::update() {

@@ -49,16 +49,6 @@ void Instance::setOrigin(double x, double y) {
     this->sprite.setOrigin(Vector2f(x, y));
 }
 
-double Instance::getX() {
-
-    return this->x;
-}
-
-double Instance::getY() {
-
-    return this->y;
-}
-
 void Instance::drawSelf() {
     
     this->sprite.setPosition(Vector2f(this->x, this->y));
@@ -74,3 +64,34 @@ void Instance::setRenderWindow(RenderWindow* window) {
 
     this->window = window;
 }   
+
+void Instance::create() {
+
+}
+
+void Instance::update() {
+
+}
+
+void Instance::draw() {
+
+}
+
+bool Instance::keyboardCheck(Keyboard::Key key) {
+
+    return Keyboard::isKeyPressed(key);
+}
+
+bool Instance::keyboardCheckPressed(Keyboard::Key key) {
+
+    if(Instance::keyboardCheck(key) && !this->is_key_pressed.at(Keyboard::Key::A)) {
+        
+        this->is_key_pressed.at(Keyboard::Key::A) = true;
+        return true;
+    }
+    else if(!Instance::keyboardCheck(key)) {
+
+        this->is_key_pressed.at(Keyboard::Key::A) = false;
+    }
+    return false;
+}

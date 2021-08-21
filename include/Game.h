@@ -7,6 +7,7 @@
 #include <SFML/Window.hpp>
 
 #include "include/Room.h"
+#include "include/Player.h"
 
 using namespace std;
 using namespace sf;
@@ -14,6 +15,10 @@ using namespace sf;
 class Game {
 
     private:
+
+        //Player
+        Player player;
+        Object object;
 
         //RenderWindow
         RenderWindow window;

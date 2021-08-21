@@ -22,13 +22,13 @@ class Room {
         RenderWindow* window;
 
         //Objects
-        vector <Object> objects;
+        vector <Object*> objects;
 
     public: Room(string room_name, RenderWindow* window);
 
         //Object functions
-        void addObject(Object object);
-        Object getObject(int index);
+        void addObject(Object* object);
+        Object* getObject(int index);
         
         //Room functions
         void update();

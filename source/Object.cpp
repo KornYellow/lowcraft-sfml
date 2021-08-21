@@ -35,16 +35,16 @@ void Object::setRenderWindow(RenderWindow* window) {
     this->window = window;
 }
 
-void Object::addInstance(Instance instance) {
+void Object::addInstance(Instance* instance) {
 
-    instance.create();
+    instance->create();
 
-    instance.setObjectName(this->object_name);
-    instance.setRenderWindow(this->window);
+    instance->setObjectName(this->object_name);
+    instance->setRenderWindow(this->window);
     this->instances.push_back(instance);
 }
 
-Instance Object::getInstance(int index) {
+Instance* Object::getInstance(int index) {
 
     return this->instances.at(index);
 }
@@ -53,7 +53,7 @@ void Object::update() {
 
     for(int i = 0; i < this->instances.size(); i++) {
 
-        this->instances.at(i).update();
+        this->instances.at(i)->update();
     }
 }
 
@@ -61,6 +61,6 @@ void Object::draw() {
 
     for(int i = 0; i < this->instances.size(); i++) {
 
-        this->instances.at(i).draw();
+        this->instances.at(i)->draw();
     }
 }
