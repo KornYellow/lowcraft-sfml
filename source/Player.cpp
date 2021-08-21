@@ -11,7 +11,7 @@ using namespace sf;
 void Instance::create() {
 
     Instance::setTexture("../resource/Player.png");
-}   
+}
 
 void Instance::update() {
 

@@ -9,6 +9,16 @@
 using namespace std;
 using namespace sf;
 
+string Instance::getObjectName() {
+
+    return this->object_name;
+}
+
+void Instance::setObjectName(string object_name) {
+
+    this->object_name = object_name;
+}
+
 void Instance::setTexture(string filename) {
 
     this->texture.loadFromFile(filename);

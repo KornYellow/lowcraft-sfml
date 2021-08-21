@@ -13,6 +13,9 @@ class Instance {
 
     private:
 
+        //Parent
+        string object_name;
+
         //General
         double x;
         double y;
@@ -36,6 +39,10 @@ class Instance {
 
     public:
         
+        //Object
+        string getObjectName();
+        void setObjectName(string object_name);
+
         //Sprite and Texture
         void setTexture(string filename);
         Texture getTexture();

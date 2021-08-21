@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include "include/Object.h"
+#include "include/Room.h"
 
 using namespace std;
 using namespace sf;
@@ -19,8 +19,8 @@ class Game {
         int window_width;
         int window_height;
 
-        //Object
-        Object object;
+        //Room
+        Room room;
 
         //Game Functions
         void create();

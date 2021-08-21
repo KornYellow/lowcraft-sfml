@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 
 #include "include/Game.h"
+#include "include/Object.h"
 #include "include/Player.h"
 
 using namespace std;
@@ -12,7 +13,7 @@ using namespace sf;
 
 Game::Game(int window_width, int window_height) : 
 window(VideoMode(window_width, window_height), "Lowcraft -- 1.0.0", Style::Close),
-object("obj_Player", &this->window) {
+room("rm_Game", &this->window) {
 
     this->window_width = window_width;
     this->window_height = window_height;
@@ -21,23 +22,23 @@ object("obj_Player", &this->window) {
 
 void Game::create() {
 
-    Player player1;
-    player1.setPosition(32, 32);
-    this->object.addInstance(player1);
+    Object object("obj_Player", &this->window);
 
-    Player player2;
-    player2.setPosition(64, 64);
-    this->object.addInstance(player2);
+    Player player;
+    player.setPosition(32, 32);
+    
+    object.addInstance(player);
+    this->room.addObject(object);
 }
 
 void Game::update() {
     
-    this->object.update();
+    this->room.update();
 }
 
 void Game::draw() {
 
-    this->object.draw();
+    this->room.draw();
 }
 
 void Game::run() {
