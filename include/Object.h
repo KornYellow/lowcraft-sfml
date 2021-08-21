@@ -29,6 +29,9 @@ class Object {
 
     public: Object(string object_name, RenderWindow* window);
 
+        //Object
+        string getObjectName();
+
         //Room
         string getRoomName();
         void setRoomName(string room_name);

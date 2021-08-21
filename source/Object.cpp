@@ -15,6 +15,11 @@ Object::Object(string object_name, RenderWindow* window) {
     this->window = window;
 }
 
+string Object::getObjectName() {
+
+    return this->object_name;
+}
+
 string Object::getRoomName() {
 
     return this->room_name;

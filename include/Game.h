@@ -16,7 +16,7 @@ class Game {
 
     private:
 
-        //Player
+        //Vector
         Player player;
         Object object;
 
@@ -34,7 +34,10 @@ class Game {
         void draw();
 
     public: Game(int window_width, int window_height);
-        
+
+        //Vector
+        void Initialize();
+
         //Window
         int getWindowWidth();   
         int getWindowHeight();
