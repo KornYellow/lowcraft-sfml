@@ -28,9 +28,6 @@ class Game {
         void update();
         void draw();
 
-        //Keyboard
-        vector <int> is_key_pressed;
-
     public: Game(int window_width, int window_height);
         
         //Window
