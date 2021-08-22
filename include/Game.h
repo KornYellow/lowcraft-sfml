@@ -7,41 +7,41 @@
 #include <SFML/Window.hpp>
 
 #include "include/Room.h"
-#include "include/Player.h"
 
 using namespace std;
 using namespace sf;
+
+class Room;
 
 class Game {
 
     private:
 
-        //Vector
-        Player player;
-        Object object;
-
-        //RenderWindow
-        RenderWindow window;
-        int window_width;
-        int window_height;
-
-        //Room
-        Room room;
-
-        //Game Functions
+        //Game
         void create();
         void update();
         void draw();
 
-    public: Game(int window_width, int window_height);
+        //RenderWindow
+        RenderWindow render_window;
+        int render_window_width;
+        int render_window_height;
 
-        //Vector
-        void Initialize();
+        //Room
+        vector <Room> rooms;
 
-        //Window
-        int getWindowWidth();   
-        int getWindowHeight();
+    public: Game(int render_window_width, int render_window_height);
 
         //Game Functions
         void run();
+
+        //RenderWindow
+        int getRenderWindowWidth();   
+        int getRenderWindowHeight();
+
+        //Room
+        void createRoom(string room_name);
+        Room* getRoom(string room_name);
+
+        void printRooms();
 };

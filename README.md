@@ -1,20 +1,26 @@
+Game Class
+```cpp
+    class Game {
+        
+        vector <Room> rooms;
+        
+        void createRoom(string room_name);
+        Room* getRoomByRoomName(string room_name);
+    }
+```
 
-MODULE
-    
-    - Game
-        - Room
-            - Instance -> Object
-                       -> Audio
-                       -> Sprite
+Room Class
+```cpp
+    class Room {
 
-Object contains a vector of Instances
-a user created object is inherit to Instance
-Object >> Instances
-test
+        string room_name;
 
-object ใส่ vector ของ instances
+        vector <Object> objects;
 
-player enemy จะ ใช้ class ของ instance
+        void setRoomName(string room_name);
+        string getRoomName();
 
-เวลา สร้าง player จะถูกยัดลง object
-เวลา จะเรียกฟังชั่น player.create() 
+        void createObject(string object_name);
+        Object* getObjectByObjectName(string object_name);
+    }
+```

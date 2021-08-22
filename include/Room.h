@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+#include "include/Room.h"
+#include "include/Game.h"
 #include "include/Object.h"
 
 using namespace std;
@@ -15,22 +17,36 @@ class Room {
 
     private:
 
+        //Game
+        Game* game;
+
         //Room
         string room_name;
 
         //RenderWindow
-        RenderWindow* window;
+        RenderWindow* render_window;
 
         //Objects
-        vector <Object*> objects;
+        vector <Object> objects;
 
-    public: Room(string room_name, RenderWindow* window);
+    public:
 
-        //Object functions
-        void addObject(Object* object);
-        Object* getObject(int index);
-        
-        //Room functions
+        //Game
+        void setGame(Game* game);
+        Game* getGame();
+
+        //Room
+        void setRoomName(string room_name);
+        string getRoomName();
+
         void update();
         void draw();
+
+        //RenderWindow
+        void setRenderWindow(RenderWindow* render_window);
+        RenderWindow* getRenderWidnow();
+
+        //Object
+        void addObject(Object* object);
+        Object* getObject(int index);
 };

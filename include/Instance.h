@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+#include "include/Object.h"
+
 using namespace std;
 using namespace sf;
 
@@ -13,27 +15,22 @@ class Instance {
 
     private:
 
-        //Parent
-        string object_name;
-
-        //General
+        //Instance
         bool is_visible;
 
-        //Movement and Position
         double direction;
         double h_speed;
         double v_speed;
         double speed;
 
-        //Window
-        RenderWindow *window;
-
-        //Sprite and Texture
         Texture texture;
         Sprite sprite;
 
         int sprite_width;
         int sprite_height;
+
+        //RenderWindow
+        RenderWindow *render_window;
 
         //Keyboard
         vector <bool> is_key_pressed;
@@ -43,6 +40,10 @@ class Instance {
         //General
         double x;
         double y;
+
+        virtual void create();
+        virtual void update();
+        virtual void draw();
         
         Instance(): is_key_pressed(999) {}
 
@@ -58,13 +59,9 @@ class Instance {
 
         //Window
         RenderWindow* getRenderWindow();  
-        void setRenderWindow(RenderWindow* window); 
+        void setRenderWindow(RenderWindow* render_window); 
 
         //Instances functions
-        virtual void create();
-        virtual void update();
-        virtual void draw();
-
         void drawSelf();
         void setOrigin(double x, double y);
 

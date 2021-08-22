@@ -8,6 +8,7 @@
 using namespace std;
 using namespace sf;
 
+/*
 void Wall::create() {
     
     Wall::setTexture("../resource/Wall.png");
@@ -21,3 +22,4 @@ void Wall::draw() {
 
     Wall::drawSelf();
 }
+*/

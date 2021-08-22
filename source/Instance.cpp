@@ -9,6 +9,7 @@
 using namespace std;
 using namespace sf;
 
+/*
 string Instance::getObjectName() {
 
     return this->object_name;
@@ -52,17 +53,17 @@ void Instance::setOrigin(double x, double y) {
 void Instance::drawSelf() {
     
     this->sprite.setPosition(Vector2f(this->x, this->y));
-    this->window->draw(this->sprite);
+    this->render_window->draw(this->sprite);
 }
 
 RenderWindow* Instance::getRenderWindow() {
 
-    return this->window;
+    return this->render_window;
 }
 
 void Instance::setRenderWindow(RenderWindow* window) {
 
-    this->window = window;
+    this->render_window = window;
 }   
 
 void Instance::create() {
@@ -95,3 +96,4 @@ bool Instance::keyboardCheckPressed(Keyboard::Key key) {
     }
     return false;
 }
+*/

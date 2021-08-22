@@ -9,10 +9,10 @@
 using namespace std;
 using namespace sf;
 
-Object::Object(string object_name, RenderWindow* window) {
+/*
+void Object::setObjectName(string object_name) {
 
     this->object_name = object_name;
-    this->window = window;
 }
 
 string Object::getObjectName() {
@@ -69,3 +69,4 @@ void Object::draw() {
         this->instances.at(i)->draw();
     }
 }
+*/

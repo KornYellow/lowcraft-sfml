@@ -11,46 +11,40 @@
 using namespace std;
 using namespace sf;
 
-Game::Game(int window_width, int window_height) : 
-window(VideoMode(window_width, window_height), "Lowcraft -- 1.0.0", Style::Close),
-room("rm_Game", &this->window), 
-object("obj_Player", &this->window) {
+Game::Game(int render_window_width, int render_window_height) : 
+render_window(VideoMode(render_window_width, render_window_height), "Lowcraft -- 1.0.0", Style::Close) {
 
-    window.setFramerateLimit(75);
+    render_window.setFramerateLimit(75);
 
-    this->window_width = window_width;
-    this->window_height = window_height;
+    this->render_window_width = render_window_width;
+    this->render_window_height = render_window_height;
     Game::create();
 }
 
+//Game
 void Game::create() {
 
-    this->player.setPosition(32, 32);
-    this->object.addInstance(&this->player);
-    this->room.addObject(&this->object);
-}
 
+}
 void Game::update() {
     
-    this->room.update();
-}
 
+}
 void Game::draw() {
 
-    this->room.draw();
-}
 
+}
 void Game::run() {
 
-    while(this->window.isOpen()) {
+    while(this->render_window.isOpen()) {
         
         Event event;
-        while(this->window.pollEvent(event)) {
+        while(this->render_window.pollEvent(event)) {
             
             switch(event.type) {
                 
                 case Event::Closed :
-                    this->window.close();
+                    this->render_window.close();
                     break;
 
                 default : break;
@@ -61,8 +55,45 @@ void Game::run() {
         Game::update();
 
         //Game Draw
-        this->window.clear();
+        this->render_window.clear();
         Game::draw();
-        this->window.display();
+        this->render_window.display();
     }
+}
+
+//RenderWindow
+int Game::getRenderWindowWidth() { return this->render_window_width; }
+int Game::getRenderWindowHeight() { return this->render_window_height; }
+
+//Room
+void Game::createRoom(string room_name) {
+
+    Room room;
+    room.setGame(this);
+    room.setRenderWindow(&this->render_window);
+    room.setRoomName(room_name);
+
+    rooms.push_back(room);
+}
+
+Room* Game::getRoom(string room_name) {
+
+    Room* room;
+    bool is_found = false;
+
+    for(int i = 0; i < this->rooms.size(); i++) {
+
+        if(this->rooms.at(i).getRoomName() == room_name) {
+
+            room = &this->rooms.at(i);
+            is_found = true;
+        }   
+    }
+    
+    if(!is_found) {
+
+        throw "ERROR: \'" + room_name + "\' has not been created yet."; 
+    }
+
+    return room;
 }

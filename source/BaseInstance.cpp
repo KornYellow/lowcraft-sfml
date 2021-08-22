@@ -7,7 +7,7 @@
 
 using namespace std;
 using namespace sf;
-
+/*
 void BaseInstance::create() {
     
     BaseInstance::setTexture("../resource/Player.png");
@@ -21,3 +21,4 @@ void BaseInstance::draw() {
 
     BaseInstance::drawSelf();
 }
+*/

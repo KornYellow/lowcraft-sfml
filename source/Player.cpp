@@ -8,6 +8,7 @@
 using namespace std;
 using namespace sf;
 
+/*
 void Player::playerMovement(double player_speed) {
     
     bool key_right = Player::keyboardCheck(Keyboard::Key::D);
@@ -45,3 +46,4 @@ void Player::draw() {
 
     Player::drawSelf();
 }
+*/
