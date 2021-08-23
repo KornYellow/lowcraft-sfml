@@ -1,14 +1,18 @@
-#include <iostream>
-
 #include "include/Game.h"
-
-using namespace std;
-
-Game game(1080, 720);
 
 int main() {
 
-    game.run();
+    Game game;
+
+    //Game Loop
+    while(game.isGameRunning()) {
+
+        //Game Update
+        game.update();
+
+        //Game Render
+        game.render();
+    }
 
     return 0;
 }

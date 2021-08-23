@@ -1,47 +1,36 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-
-#include "include/Room.h"
-
-using namespace std;
-using namespace sf;
-
-class Room;
+#include <SFML/System.hpp>
+#include <SFML/Audio.hpp>
 
 class Game {
 
-    private:
+    private :
+        
+        //RenderWindow
+        sf::RenderWindow* render_window;
+        sf::VideoMode video_mode;
+        sf::Event event;
 
-        //Game
-        void create();
+        //Initialize
+        void initVariables();
+        void initRenderWindow();
+
+    public :
+
+        //Constructor and Destructor
+        Game();
+        virtual ~Game();
+
+        //Accessors
+        const bool isGameRunning() const;
+
+        //Functions
+        void pollEvents();
         void update();
-        void draw();
-
-        //RenderWindow
-        RenderWindow render_window;
-        int render_window_width;
-        int render_window_height;
-
-        //Room
-        vector <Room> rooms;
-
-    public: Game(int render_window_width, int render_window_height);
-
-        //Game Functions
-        void run();
-
-        //RenderWindow
-        int getRenderWindowWidth();   
-        int getRenderWindowHeight();
-
-        //Room
-        void createRoom(string room_name);
-        Room* getRoom(string room_name);
-
-        void printRooms();
+        void render();
 };
