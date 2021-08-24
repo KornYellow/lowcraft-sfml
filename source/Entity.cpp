@@ -25,6 +25,7 @@ void Entity::setSprite(std::string sprite_path) {
 
     this->sprite->setTexture(*this->texture);
     this->sprite->setOrigin(sf::Vector2f(this->sprite_width / 2, this->sprite_height / 2));
+    this->sprite->setPosition(this->position);
 }
 sf::Sprite* Entity::getSprite() {
 
@@ -48,5 +49,11 @@ void Entity::update() {
 }
 void Entity::render() {
 
+    this->drawSelf();
+}
+
+void Entity::drawSelf() {
+
+    this->render_window->draw(*this->sprite);
 }
 

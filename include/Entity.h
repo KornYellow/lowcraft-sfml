@@ -44,4 +44,6 @@ class Entity {
         virtual void create();
         virtual void update();
         virtual void render();
+
+        void drawSelf();
 };
