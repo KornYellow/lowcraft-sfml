@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -24,13 +25,16 @@ class Entity {
         //Entity
         sf::Vector2f position;
 
+        //Keyboard
+        std::vector <int> is_key_pressed;
+
         //Initialize
         void initVariables();
 
     public : 
 
         //Constructor and Destructor
-        Entity();
+        Entity(): is_key_pressed(1000) {}
         virtual ~Entity();
 
         //Accessor
@@ -51,4 +55,6 @@ class Entity {
         void drawSelf();
 
         //Keyboard
+        bool keyboardCheck(sf::Keyboard::Key key);
+        bool keyboardCheckPressed(sf::Keyboard::Key key);
 };
