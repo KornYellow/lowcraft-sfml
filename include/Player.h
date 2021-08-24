@@ -20,6 +20,7 @@ class Player : public Entity {
 
         //Movement
         void playerMovement(double player_speed);
+        void playerFollowMouse();
 
     public :
 

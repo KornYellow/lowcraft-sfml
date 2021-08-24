@@ -16,6 +16,7 @@ void Game::initRenderWindow() {
 
     this->render_window = new sf::RenderWindow(this->video_mode, "Rhythm Invader -- 1.0.0", sf::Style::Titlebar | sf::Style::Close);
     this->render_window->setFramerateLimit(75);
+    this->render_window->setMouseCursorVisible(false);
 }
 void Game::initPlayer() {
 
@@ -73,7 +74,7 @@ void Game::update() {
 }
 void Game::render() {
 
-    this->render_window->clear(sf::Color(120, 120, 120, 255));
+    this->render_window->clear(sf::Color(0, 0, 0, 255));
     this->player->render();
     this->render_window->display();
 }

@@ -8,6 +8,7 @@ void Entity::initVariables() {
 
     //Keyboard
     this->is_key_pressed.resize(1000);
+    this->is_mouse_pressed.resize(100);
 }
 
 //Constructor and Destructor
@@ -37,8 +38,6 @@ void Entity::setSprite(std::string sprite_path) {
     this->sprite.setTexture(this->texture);
     this->sprite.setOrigin(sf::Vector2f(this->sprite_width / 2, this->sprite_height / 2));
     this->sprite.setPosition(this->x, this->y);
-
-    std::cout << "set Sprite" << std::endl;
 }
 sf::Sprite Entity::getSprite() {
 
@@ -65,19 +64,17 @@ void Entity::render() {
 
     this->drawSelf();
 }
-
 void Entity::drawSelf() {
 
     this->sprite.setPosition(this->x, this->y);
     this->render_window->draw(this->sprite);
 }
 
-//Keyboard
+//Keyboard and Mouse
 bool Entity::keyboardCheck(sf::Keyboard::Key key) {
 
     return sf::Keyboard::isKeyPressed(key);
 }
-
 bool Entity::keyboardCheckPressed(sf::Keyboard::Key key) {
 
     if(this->keyboardCheck(key) && !this->is_key_pressed.at(sf::Keyboard::Key::A)) {
@@ -90,4 +87,25 @@ bool Entity::keyboardCheckPressed(sf::Keyboard::Key key) {
         this->is_key_pressed.at(sf::Keyboard::Key::A) = false;
     }
     return false;
+}
+bool Entity::mouseCheck(sf::Mouse::Button key) {
+
+    return sf::Mouse::isButtonPressed(key);
+}
+bool Entity::mouseCheckPressed(sf::Mouse::Button key) {
+
+    if(this->mouseCheck(key) && !this->is_mouse_pressed.at(key)) {
+        
+        this->is_mouse_pressed.at(key) = true;
+        return true;
+    }
+    else if(!this->mouseCheck(key)) {
+
+        this->is_mouse_pressed.at(key) = false;
+    }
+    return false;
+}
+sf::Vector2f Entity::getMousePosition() {
+
+    return (sf::Vector2f)sf::Mouse::getPosition(*this->render_window);
 }

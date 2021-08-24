@@ -22,8 +22,9 @@ class Entity {
         int sprite_width;
         int sprite_height;
 
-        //Keyboard
+        //Keyboard and Mouse
         std::vector <int> is_key_pressed;
+        std::vector <int> is_mouse_pressed;
 
         //Initialize
         void initVariables();
@@ -55,7 +56,10 @@ class Entity {
 
         void drawSelf();
 
-        //Keyboard
+        //Keyboard and Mouse
         bool keyboardCheck(sf::Keyboard::Key key);
         bool keyboardCheckPressed(sf::Keyboard::Key key);
+        bool mouseCheck(sf::Mouse::Button key);
+        bool mouseCheckPressed(sf::Mouse::Button key);
+        sf::Vector2f getMousePosition();
 };

@@ -16,14 +16,15 @@ void Player::playerMovement(double player_speed) {
 
     this->x += this->player_speed_h;
     this->y += this->player_speed_v;
-
-    this->setPosition(this->x, this->y);
+}
+void Player::playerFollowMouse() {
+    
+    this->x += (this->getMousePosition().x - this->x) / 5;
+    this->y += (this->getMousePosition().y - this->y) / 5;
 }
 
 //Functions
 void Player::create() {
-
-    std::cout << "Player created." << std::endl;
 
     this->player_speed_h = 0;
     this->player_speed_v = 0;
@@ -34,7 +35,9 @@ void Player::create() {
 }
 void Player::update() {
     
-    this->playerMovement(this->player_speed);
+    this->playerFollowMouse();
+
+    this->setPosition(this->x, this->y);
 }
 void Player::render() {
 
