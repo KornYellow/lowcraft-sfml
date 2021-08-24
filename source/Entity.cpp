@@ -5,22 +5,12 @@ void Entity::initVariables() {
     
     //RenderWindow
     this->render_window = nullptr;
-
-    //Sprite and Texture
-    this->sprite = nullptr;
-    this->texture = nullptr;
-}
-void Entity::initSpriteAndTexture() {
-
-    this->sprite = new sf::Sprite();
-    this->texture = new sf::Texture();
 }
 
 //Constructor and Destructor
 Entity::Entity() {
 
     this->initVariables();
-    this->initSpriteAndTexture();
 }
 Entity::~Entity() {
 
@@ -37,15 +27,17 @@ sf::RenderWindow* Entity::getRenderWindow() {
 }
 void Entity::setSprite(std::string sprite_path) {
 
-    this->texture->loadFromFile(sprite_path);
-    this->sprite_width = this->texture->getSize().x;
-    this->sprite_height = this->texture->getSize().y;
+    this->texture.loadFromFile(sprite_path);
+    this->sprite_width = this->texture.getSize().x;
+    this->sprite_height = this->texture.getSize().y;
 
-    this->sprite->setTexture(*this->texture);
-    this->sprite->setOrigin(sf::Vector2f(this->sprite_width / 2, this->sprite_height / 2));
-    this->sprite->setPosition(this->position);
+    this->sprite.setTexture(this->texture);
+    this->sprite.setOrigin(sf::Vector2f(this->sprite_width / 2, this->sprite_height / 2));
+    this->sprite.setPosition(this->position);
+
+    std::cout << "set Sprite" << std::endl;
 }
-sf::Sprite* Entity::getSprite() {
+sf::Sprite Entity::getSprite() {
 
     return this->sprite;
 }
@@ -72,6 +64,6 @@ void Entity::render() {
 
 void Entity::drawSelf() {
 
-    this->render_window->draw(*this->sprite);
+    this->render_window->draw(this->sprite);
 }
 

@@ -16,8 +16,8 @@ class Entity {
         sf::RenderWindow* render_window;
 
         //Sprite and Texture
-        sf::Sprite* sprite;
-        sf::Texture* texture;
+        sf::Sprite sprite;
+        sf::Texture texture;
         int sprite_width;
         int sprite_height;
 
@@ -26,7 +26,6 @@ class Entity {
 
         //Initialize
         void initVariables();
-        void initSpriteAndTexture();
 
     public : 
 
@@ -39,7 +38,7 @@ class Entity {
         sf::RenderWindow* getRenderWindow();
 
         void setSprite(std::string sprite_path);
-        sf::Sprite* getSprite();
+        sf::Sprite getSprite();
 
         void setPosition(sf::Vector2f position);
         sf::Vector2f getPosition();
@@ -50,4 +49,6 @@ class Entity {
         virtual void render();
 
         void drawSelf();
+
+        //Keyboard
 };

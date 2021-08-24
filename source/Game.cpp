@@ -5,6 +5,9 @@ void Game::initVariables() {
 
     //RenderWindow
     this->render_window = nullptr;
+
+    //Player
+    this->player = nullptr;
 }
 void Game::initRenderWindow() {
 
@@ -13,12 +16,19 @@ void Game::initRenderWindow() {
 
     this->render_window = new sf::RenderWindow(this->video_mode, "Rhythm Invader -- 1.0.0", sf::Style::Titlebar | sf::Style::Close);
 }
+void Game::initPlayer() {
+
+    this->player = new Player();
+    this->player->setRenderWindow(this->render_window);
+    this->player->create();
+}
 
 //Constructor and Destructor
 Game::Game() {
 
     this->initVariables();
     this->initRenderWindow();
+    this->initPlayer();
 }
 Game::~Game() {
 
@@ -56,10 +66,13 @@ void Game::pollEvents() {
 }
 void Game::update() {
 
-    Game::pollEvents();
+    this->pollEvents();
+
+    this->player->update();
 }
 void Game::render() {
 
     this->render_window->clear(sf::Color(120, 120, 120, 255));
+    this->player->render();
     this->render_window->display();
 }

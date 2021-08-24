@@ -7,6 +7,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 
+#include "include/Player.h"
+
 class Game {
 
     private :
@@ -16,9 +18,13 @@ class Game {
         sf::VideoMode video_mode;
         sf::Event event;
 
+        //Player
+        Player* player;
+
         //Initialize
         void initVariables();
         void initRenderWindow();
+        void initPlayer();
 
     public :
 
