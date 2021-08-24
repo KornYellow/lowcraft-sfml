@@ -1,8 +1,26 @@
 #include "include/Entity.h"
 
+//Initialize
+void Entity::initVariables() {
+    
+    //RenderWindow
+    this->render_window = nullptr;
+
+    //Sprite and Texture
+    this->sprite = nullptr;
+    this->texture = nullptr;
+}
+void Entity::initSpriteAndTexture() {
+
+    this->sprite = new sf::Sprite();
+    this->texture = new sf::Texture();
+}
+
 //Constructor and Destructor
 Entity::Entity() {
 
+    this->initVariables();
+    this->initSpriteAndTexture();
 }
 Entity::~Entity() {
 

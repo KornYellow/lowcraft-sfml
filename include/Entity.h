@@ -24,6 +24,10 @@ class Entity {
         //Entity
         sf::Vector2f position;
 
+        //Initialize
+        void initVariables();
+        void initSpriteAndTexture();
+
     public : 
 
         //Constructor and Destructor
