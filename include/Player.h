@@ -14,11 +14,17 @@ class Player : public Entity {
 
     private :
 
+        double player_speed;
+        double player_speed_h;
+        double player_speed_v;
+
+        //Movement
+        void playerMovement(double player_speed);
+
     public :
 
         //Functions
         void create();
         void update();
         void render();
-
-};
+};  

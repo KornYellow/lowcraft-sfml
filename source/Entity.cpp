@@ -5,11 +5,14 @@ void Entity::initVariables() {
     
     //RenderWindow
     this->render_window = nullptr;
+
+    //Keyboard
+    this->is_key_pressed.resize(1000);
 }
 
 //Constructor and Destructor
 Entity::Entity() {
-
+    
     this->initVariables();
 }
 Entity::~Entity() {
@@ -33,7 +36,7 @@ void Entity::setSprite(std::string sprite_path) {
 
     this->sprite.setTexture(this->texture);
     this->sprite.setOrigin(sf::Vector2f(this->sprite_width / 2, this->sprite_height / 2));
-    this->sprite.setPosition(this->position);
+    this->sprite.setPosition(this->x, this->y);
 
     std::cout << "set Sprite" << std::endl;
 }
@@ -41,13 +44,14 @@ sf::Sprite Entity::getSprite() {
 
     return this->sprite;
 }
-void Entity::setPosition(sf::Vector2f position) {
+void Entity::setPosition(double x, double y) {
 
-    this->position = position;
+    this->x = x;
+    this->y = y;
 }
 sf::Vector2f Entity::getPosition() {
     
-    return this->position;
+    return sf::Vector2f(this->x, this->y);
 }
 
 //Functions
@@ -64,7 +68,7 @@ void Entity::render() {
 
 void Entity::drawSelf() {
 
-    this->sprite.setPosition(this->position);
+    this->sprite.setPosition(this->x, this->y);
     this->render_window->draw(this->sprite);
 }
 

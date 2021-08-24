@@ -15,6 +15,7 @@ void Game::initRenderWindow() {
     this->video_mode.height = 720; 
 
     this->render_window = new sf::RenderWindow(this->video_mode, "Rhythm Invader -- 1.0.0", sf::Style::Titlebar | sf::Style::Close);
+    this->render_window->setFramerateLimit(75);
 }
 void Game::initPlayer() {
 

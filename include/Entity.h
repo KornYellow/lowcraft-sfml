@@ -22,9 +22,6 @@ class Entity {
         int sprite_width;
         int sprite_height;
 
-        //Entity
-        sf::Vector2f position;
-
         //Keyboard
         std::vector <int> is_key_pressed;
 
@@ -33,8 +30,12 @@ class Entity {
 
     public : 
 
+        //Entity
+        double x;
+        double y;
+
         //Constructor and Destructor
-        Entity(): is_key_pressed(1000) {}
+        Entity();
         virtual ~Entity();
 
         //Accessor
@@ -44,7 +45,7 @@ class Entity {
         void setSprite(std::string sprite_path);
         sf::Sprite getSprite();
 
-        void setPosition(sf::Vector2f position);
+        void setPosition(double x, double y);
         sf::Vector2f getPosition();
 
         //Functions
