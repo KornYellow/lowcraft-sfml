@@ -109,3 +109,14 @@ sf::Vector2f Entity::getMousePosition() {
 
     return (sf::Vector2f)sf::Mouse::getPosition(*this->render_window);
 }
+
+//Bounding Box
+bool Entity::isOutOfRenderWindow() {
+
+    int window_x = this->render_window->getSize().x;
+    int window_y = this->render_window->getSize().y;
+
+    if(this->x < -this->sprite_width || this->x > window_x + this->sprite_width) return true;
+    if(this->y < -this->sprite_height || this->y > window_y + this->sprite_height) return true;
+    return false;
+}

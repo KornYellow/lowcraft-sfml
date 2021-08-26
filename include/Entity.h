@@ -62,4 +62,7 @@ class Entity {
         bool mouseCheck(sf::Mouse::Button key);
         bool mouseCheckPressed(sf::Mouse::Button key);
         sf::Vector2f getMousePosition();
+
+        //Bounding Box
+        bool isOutOfRenderWindow();
 };

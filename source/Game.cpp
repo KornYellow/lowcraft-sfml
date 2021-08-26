@@ -36,6 +36,9 @@ Game::~Game() {
 
     //RenderWindow
     delete this->render_window;
+
+    //Player
+    delete this->player;
 }
 
 //Accessors
