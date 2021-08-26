@@ -9,6 +9,7 @@
 #include <SFML/Audio.hpp>
 
 #include "include/Player.h"
+#include "include/Conductor.h"
 
 class Game {
 
@@ -22,10 +23,14 @@ class Game {
         //Player
         Player* player;
 
+        //Conductor
+        Conductor* conductor;
+
         //Initialize
         void initVariables();
         void initRenderWindow();
         void initPlayer();
+        void initConductor();
 
     public :
 

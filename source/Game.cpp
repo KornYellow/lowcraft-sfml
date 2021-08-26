@@ -24,6 +24,12 @@ void Game::initPlayer() {
     this->player->setRenderWindow(this->render_window);
     this->player->create();
 }
+void Game::initConductor() {
+
+    this->conductor = new Conductor();
+    this->conductor->playMusic("Creatures Ov Deception");
+    this->conductor->playMusic("La Danse Macabre");
+}
 
 //Constructor and Destructor
 Game::Game() {
@@ -31,6 +37,7 @@ Game::Game() {
     this->initVariables();
     this->initRenderWindow();
     this->initPlayer();
+    this->initConductor();
 }
 Game::~Game() {
 
@@ -39,6 +46,9 @@ Game::~Game() {
 
     //Player
     delete this->player;
+
+    //Conductor
+    delete this->conductor;
 }
 
 //Accessors
@@ -74,10 +84,11 @@ void Game::update() {
     this->pollEvents();
 
     this->player->update();
+    this->conductor->update();
 }
 void Game::render() {
 
     this->render_window->clear(sf::Color(0, 0, 0, 255));
     this->player->render();
-    this->render_window->display();
+    this->render_window->display(); 
 }
