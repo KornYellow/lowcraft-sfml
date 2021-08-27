@@ -16,13 +16,13 @@ class Bullet : public Entity {
 
     private :
 
-        double bullet_speed;
-        double bullet_direction;
+    public :
 
         //Movement
+        double bullet_speed;
+        double bullet_direction;
+        
         void bulletMovement(double bullet_speed, double bullet_direction);
-
-    public :
 
         //Accessors
         void setBulletSpeed(double bullet_speed);
@@ -31,7 +31,7 @@ class Bullet : public Entity {
         double getBulletDirection();
 
         //Functions
-        void create();
-        void update();
-        void render();
+        virtual void create();
+        virtual void update();
+        virtual void render();
 };  

@@ -30,15 +30,10 @@ double Bullet::getBulletDirection() {
 //Functions
 void Bullet::create() {
 
-    this->setSprite("../resource/Bullet.png");
 }
 void Bullet::update() {
     
-    this->bulletMovement(this->bullet_speed, this->bullet_direction);
-
-    this->setPosition(this->x, this->y);
 }
 void Bullet::render() {
 
-    this->drawSelf();
 }
