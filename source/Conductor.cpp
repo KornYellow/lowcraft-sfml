@@ -113,20 +113,34 @@ void Conductor::manageBeat() {
                 }
             }
         }
-        /*
-        std::cout << this->beat_1 << std::endl;
-        std::cout << this->beat_1_2 << std::endl;
-        std::cout << this->beat_1_4 << std::endl;
-        std::cout << this->beat_1_8 << std::endl;
-        std::cout << this->beat_1_16 << std::endl;
-        std::cout << this->beat_1_32 << std::endl;
-        */
+        this->beatActionCreaturesOvDeception(this->beat_1_32);
     }
+}
+
+//Player
+void Conductor::setPlayer(Player* player) {
+
+    this->player = player;
+}
+Player* Conductor::getPlayer() {
+
+    return this->player;
 }
 
 //Functions
 void Conductor::update() {
     
     this->manageBeat();
-    this->displayMusicStatus();
+    //this->displayMusicStatus();
+}
+
+//Beat Action
+void Conductor::beatActionCreaturesOvDeception(int beat) {
+
+    if(beat % 4 == 0) {
+
+        int window_width = this->player->getRenderWindow()->getSize().x;
+        int random_x = Randomize::randomIntRange(0, window_width);
+        this->player->createBulletEnemy(random_x, 28, 4, 90, "Rectangle");
+    }
 }

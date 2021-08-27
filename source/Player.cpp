@@ -26,7 +26,7 @@ void Player::playerShootBullet() {
 
     if(Player::mouseCheck(sf::Mouse::Button::Left) && this->player_shoot_delay < 0) {
 
-        this->createBullet();
+        this->createBulletPlayer();
 
         this->player_shoot_delay = this->player_shoot_firerate;
     }
@@ -34,38 +34,74 @@ void Player::playerShootBullet() {
 }
 
 //Bullets
-void Player::createBullet() {
+void Player::createBulletPlayer() {
 
-    Bullet* bullet = new Bullet();
+    BulletPlayer* bullet = new BulletPlayer();
     bullet->create();
     bullet->setRenderWindow(this->getRenderWindow());
     bullet->setPosition(this->getPosition().x, this->getPosition().y - 20);
     bullet->setBulletSpeed(10);
     bullet->setBulletDirection(-90);
 
-    this->bullets.push_back(bullet);
+    this->bullets_player.push_back(bullet);
 }
-void Player::updateBullet() {
+void Player::updateBulletPlayer() {
 
-    for(int i = 0; i < this->bullets.size(); i++) {
+    for(int i = 0; i < this->bullets_player.size(); i++) {
 
-        this->bullets.at(i)->update();
+        this->bullets_player.at(i)->update();
     }
 }
-void Player::renderBullet() {
+void Player::renderBulletPlayer() {
 
-    for(int i = 0; i < this->bullets.size(); i++) {
+    for(int i = 0; i < this->bullets_player.size(); i++) {
    
-        this->bullets.at(i)->render();
+        this->bullets_player.at(i)->render();
     }
 }   
-void Player::deleteBullet() {
+void Player::deleteBulletPlayer() {
 
-    for(int i = 0; i < this->bullets.size(); i++) {
+    for(int i = 0; i < this->bullets_player.size(); i++) {
 
-        if(this->bullets.at(i)->isOutOfRenderWindow()) {
+        if(this->bullets_player.at(i)->isOutOfRenderWindow()) {
 
-            this->bullets.erase(this->bullets.begin() + i);
+            this->bullets_player.erase(this->bullets_player.begin() + i);
+        }
+    }
+}
+void Player::createBulletEnemy(double x, double y, double speed, int direction, std::string type) {
+
+    BulletEnemy* bullet = new BulletEnemy();
+    bullet->create();
+    bullet->setRenderWindow(this->getRenderWindow());
+    bullet->setPosition(x, y);
+    bullet->setBulletSpeed(speed);
+    bullet->setBulletDirection(direction);
+    bullet->setBulletType(type);
+
+    this->bullets_enemy.push_back(bullet);
+}
+void Player::updateBulletEnemy() {
+
+    for(int i = 0; i < this->bullets_enemy.size(); i++) {
+
+        this->bullets_enemy.at(i)->update();
+    }
+}
+void Player::renderBulletEnemy() {
+
+    for(int i = 0; i < this->bullets_enemy.size(); i++) {
+   
+        this->bullets_enemy.at(i)->render();
+    }
+}   
+void Player::deleteBulletEnemy() {
+
+    for(int i = 0; i < this->bullets_enemy.size(); i++) {
+
+        if(this->bullets_enemy.at(i)->isOutOfRenderWindow()) {
+
+            this->bullets_enemy.erase(this->bullets_enemy.begin() + i);
         }
     }
 }
@@ -92,8 +128,11 @@ void Player::update() {
     this->setPosition(this->x, this->y);
     
     //Bullets
-    this->updateBullet();
-    this->deleteBullet();
+    this->updateBulletPlayer();
+    this->deleteBulletPlayer();
+
+    this->updateBulletEnemy();
+    this->deleteBulletEnemy();
 }
 void Player::render() {
 
@@ -101,5 +140,6 @@ void Player::render() {
     this->drawSelf();
 
     //Bullets
-    this->renderBullet();
+    this->renderBulletPlayer();
+    this->renderBulletEnemy();
 }

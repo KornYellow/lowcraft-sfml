@@ -10,7 +10,8 @@
 #include <SFML/Audio.hpp>
 
 #include "include/Entity.h"
-#include "include/Bullet.h"
+#include "include/BulletPlayer.h"
+#include "include/BulletEnemy.h"
 
 class Player : public Entity {
 
@@ -24,20 +25,26 @@ class Player : public Entity {
         double player_shoot_firerate;
 
         //Bullets
-        std::vector <Bullet*> bullets;
-
+        std::vector <BulletPlayer*> bullets_player;
+        std::vector <BulletEnemy*> bullets_enemy;
+        
         //Movement
         void playerMovement(double player_speed);
         void playerFollowMouse();
         void playerShootBullet();
 
-        //Bullets
-        void createBullet();
-        void updateBullet();
-        void renderBullet();
-        void deleteBullet();
-
     public :
+
+        //Bullets
+        void createBulletPlayer();
+        void updateBulletPlayer();
+        void renderBulletPlayer();
+        void deleteBulletPlayer();
+
+        void createBulletEnemy(double x, double y, double speed, int direction, std::string type);
+        void updateBulletEnemy();
+        void renderBulletEnemy();
+        void deleteBulletEnemy();
 
         //Functions
         void create();

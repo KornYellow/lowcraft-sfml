@@ -10,11 +10,16 @@
 #include <SFML/Audio.hpp>
 
 #include "include/MusicLibrary.h"
+#include "include/Player.h"
+#include "include/Randomize.h"
 
 class Conductor {
 
     private :
         
+        //Player
+        Player* player;
+
         //Music
         sf::Music music;
         std::string music_name;
@@ -45,7 +50,14 @@ class Conductor {
         void calculateBeat();
         void manageBeat();
 
+        //Beat Action
+        void beatActionCreaturesOvDeception(int beat);
+
     public :
+
+        //Player
+        void setPlayer(Player* player);
+        Player* getPlayer();
 
         //Constructor and Destructor
         Conductor();
