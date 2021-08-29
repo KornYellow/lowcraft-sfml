@@ -72,12 +72,13 @@ void Player::deleteBulletPlayer() {
 void Player::createBulletEnemy(double x, double y, double speed, int direction, std::string type) {
 
     BulletEnemy* bullet = new BulletEnemy();
-    bullet->create();
     bullet->setRenderWindow(this->getRenderWindow());
     bullet->setPosition(x, y);
     bullet->setBulletSpeed(speed);
     bullet->setBulletDirection(direction);
     bullet->setBulletType(type);
+
+    bullet->create();
 
     this->bullets_enemy.push_back(bullet);
 }

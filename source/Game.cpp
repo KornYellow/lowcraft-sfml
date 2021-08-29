@@ -24,11 +24,12 @@ void Game::initPlayer() {
     this->player->setRenderWindow(this->render_window);
     this->player->create();
 }
-void Game::initConductor() {
+void Game::initConductor() { 
 
     this->conductor = new Conductor();
+    this->conductor->setPlayer(this->player);
     this->conductor->playMusic("Creatures Ov Deception");
-    this->conductor->playMusic("La Danse Macabre");
+    //this->conductor->playMusic("La Danse Macabre");
 }
 
 //Constructor and Destructor

@@ -141,6 +141,6 @@ void Conductor::beatActionCreaturesOvDeception(int beat) {
 
         int window_width = this->player->getRenderWindow()->getSize().x;
         int random_x = Randomize::randomIntRange(0, window_width);
-        this->player->createBulletEnemy(random_x, 28, 4, 90, "Rectangle");
+        this->player->createBulletEnemy(random_x, 28, 7, 90, "Rectangle");
     }
 }
