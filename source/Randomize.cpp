@@ -7,5 +7,5 @@ int Randomize::randomInt(int a) {
 }
 int Randomize::randomIntRange(int a, int b) {
 
-    return rand() % b + a;
+    return rand() % (b + 1 - a) + a;
 }
