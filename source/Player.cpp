@@ -1,5 +1,43 @@
 #include "include/Player.h"
 
+//Functions
+void Player::create() {
+
+    this->player_speed_h = 0;
+    this->player_speed_v = 0;
+    this->player_speed = 6;
+
+    this->player_shoot_delay = 0;
+    this->player_shoot_firerate = 5;
+
+    this->setPosition(32, 32);
+    this->setSprite("../resource/Player.png");
+}
+void Player::update() {
+    
+    //Player
+    this->playerFollowMouse();
+    this->playerShootBullet();
+
+    this->setPosition(this->x, this->y);
+    
+    //Bullets
+    this->updateBulletPlayer();
+    this->deleteBulletPlayer();
+
+    this->updateBulletEnemy();
+    this->deleteBulletEnemy();
+}
+void Player::render() {
+
+    //Bullets
+    this->renderBulletEnemy();
+    this->renderBulletPlayer();
+
+    //Player
+    this->drawSelf();
+}
+
 //Movement
 void Player::playerMovement(double player_speed) {
     
@@ -26,7 +64,8 @@ void Player::playerShootBullet() {
 
     if(Player::mouseCheck(sf::Mouse::Button::Left) && this->player_shoot_delay < 0) {
 
-        this->createBulletPlayer();
+        int bullet_x = Randomize::randomIntRange(this->x - 5, this->x + 5);
+        this->createBulletPlayer(bullet_x, this->y - 20, 15, -90);
 
         this->player_shoot_delay = this->player_shoot_firerate;
     }
@@ -34,14 +73,14 @@ void Player::playerShootBullet() {
 }
 
 //Bullets
-void Player::createBulletPlayer() {
+void Player::createBulletPlayer(double x, double y, double speed, int direction) {
 
     BulletPlayer* bullet = new BulletPlayer();
     bullet->create();
     bullet->setRenderWindow(this->getRenderWindow());
-    bullet->setPosition(this->getPosition().x, this->getPosition().y - 20);
-    bullet->setBulletSpeed(10);
-    bullet->setBulletDirection(-90);
+    bullet->setPosition(x, y);
+    bullet->setBulletSpeed(speed);
+    bullet->setBulletDirection(direction);
 
     this->bullets_player.push_back(bullet);
 }
@@ -105,42 +144,4 @@ void Player::deleteBulletEnemy() {
             this->bullets_enemy.erase(this->bullets_enemy.begin() + i);
         }
     }
-}
-
-//Functions
-void Player::create() {
-
-    this->player_speed_h = 0;
-    this->player_speed_v = 0;
-    this->player_speed = 6;
-
-    this->player_shoot_delay = 0;
-    this->player_shoot_firerate = 10;
-
-    this->setPosition(32, 32);
-    this->setSprite("../resource/Player.png");
-}
-void Player::update() {
-    
-    //Player
-    this->playerFollowMouse();
-    this->playerShootBullet();
-
-    this->setPosition(this->x, this->y);
-    
-    //Bullets
-    this->updateBulletPlayer();
-    this->deleteBulletPlayer();
-
-    this->updateBulletEnemy();
-    this->deleteBulletEnemy();
-}
-void Player::render() {
-
-    //Player
-    this->drawSelf();
-
-    //Bullets
-    this->renderBulletPlayer();
-    this->renderBulletEnemy();
 }

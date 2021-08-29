@@ -131,7 +131,7 @@ Player* Conductor::getPlayer() {
 void Conductor::update() {
     
     this->manageBeat();
-    //this->displayMusicStatus();
+    this->displayMusicStatus();
 }
 
 //Beat Action

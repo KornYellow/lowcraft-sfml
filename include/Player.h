@@ -12,6 +12,7 @@
 #include "include/Entity.h"
 #include "include/BulletPlayer.h"
 #include "include/BulletEnemy.h"
+#include "include/Randomize.h"
 
 class Player : public Entity {
 
@@ -36,7 +37,7 @@ class Player : public Entity {
     public :
 
         //Bullets
-        void createBulletPlayer();
+        void createBulletPlayer(double x, double y, double speed, int direction);
         void updateBulletPlayer();
         void renderBulletPlayer();
         void deleteBulletPlayer();

@@ -11,10 +11,10 @@ void Game::initVariables() {
 }
 void Game::initRenderWindow() {
 
-    this->video_mode.width = 1280;
-    this->video_mode.height = 720; 
+    this->video_mode.width = 1920;
+    this->video_mode.height = 1080; 
 
-    this->render_window = new sf::RenderWindow(this->video_mode, "Rhythm Invader -- 1.0.0", sf::Style::Titlebar | sf::Style::Close);
+    this->render_window = new sf::RenderWindow(this->video_mode, "Rhythm Invader -- 1.0.0", sf::Style::Titlebar | sf::Style::Close | sf::Style::Fullscreen);
     this->render_window->setFramerateLimit(75);
     this->render_window->setMouseCursorVisible(false);
 }
@@ -28,6 +28,8 @@ void Game::initConductor() {
 
     this->conductor = new Conductor();
     this->conductor->setPlayer(this->player);
+    
+    //Choose music
     this->conductor->playMusic("Creatures Ov Deception");
     //this->conductor->playMusic("La Danse Macabre");
 }
