@@ -9,6 +9,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 
+#include "include/Particle.h"
+#include "include/ParticleCircle.h"
+
 class Entity {
 
     private :  
@@ -16,8 +19,11 @@ class Entity {
         //RenderWindow
         sf::RenderWindow* render_window;
 
+        //Particles
+        std::vector <Particle*> particles;
+
         //Sprite and Texture
-        sf::Sprite sprite;
+        sf::Sprite* sprite;
         sf::Texture texture;
         int sprite_width;
         int sprite_height;
@@ -34,17 +40,21 @@ class Entity {
         //Entity
         double x;
         double y;
+        double rotation;
 
         //Constructor and Destructor
         Entity();
         virtual ~Entity();
 
         //Accessor
+        int getSpriteWidth();
+        int getSpriteHeight();
+
         void setRenderWindow(sf::RenderWindow* render_window);
         sf::RenderWindow* getRenderWindow();
 
         void setSprite(std::string sprite_path);
-        sf::Sprite getSprite();
+        sf::Sprite* getSprite();
 
         void setPosition(double x, double y);
         sf::Vector2f getPosition();
@@ -62,6 +72,14 @@ class Entity {
         bool mouseCheck(sf::Mouse::Button key);
         bool mouseCheckPressed(sf::Mouse::Button key);
         sf::Vector2f getMousePosition();
+
+        //Particles
+        std::vector <Particle*> getParticles();
+        void createParticleCircle(double x, double y, int radius, int r, int g, int b, int target_r, int target_g, int target_b);
+        void setParticlePosition(double x, double y);
+        void updateParticle();
+        void renderParticle();
+        void deleteParticle();
 
         //Bounding Box
         bool isOutOfRenderWindow();

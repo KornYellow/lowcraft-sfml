@@ -10,7 +10,6 @@ void Player::create() {
     this->player_shoot_delay = 0;
     this->player_shoot_firerate = 5;
 
-    this->setPosition(32, 32);
     this->setSprite("../resource/Player.png");
 }
 void Player::update() {
@@ -27,6 +26,10 @@ void Player::update() {
 
     this->updateBulletEnemy();
     this->deleteBulletEnemy();
+
+    //Enemy
+    this->updateEnemyWave();
+    this->updateEnemy();
 }
 void Player::render() {
 
@@ -34,8 +37,83 @@ void Player::render() {
     this->renderBulletEnemy();
     this->renderBulletPlayer();
 
+    //Enemy
+    this->renderEnemyWave();
+    this->renderEnemy();
+
     //Player
     this->drawSelf();
+}
+
+//EnemyWave
+void Player::moveEnemyWave(double x, double y) {
+
+    for(int i = 0; i < this->enemy_waves.size(); i++) {
+
+        this->enemy_waves.at(i)->moveEnemyWave(x, y);
+    }
+}
+void Player::moveEnemyWave() {
+
+    for(int i = 0; i < this->enemy_waves.size(); i++) {
+
+        this->enemy_waves.at(i)->moveEnemyWave();
+    }
+}
+void Player::createEnemyWave(double x, double y, int enemy_count, int enemy_count_row, int wave_gap) {
+
+    EnemyWave* enemy_wave = new EnemyWave();
+    enemy_wave->setPlayer(this);
+    enemy_wave->setRenderWindow(this->getRenderWindow());
+    enemy_wave->setEnemyCountColumn(enemy_count);
+    enemy_wave->setEnemyCountRow(enemy_count_row);
+    enemy_wave->setWaveGap(wave_gap);
+    enemy_wave->setPosition(x, y);
+    enemy_wave->create();
+    
+    this->enemy_waves.push_back(enemy_wave);
+}
+void Player::updateEnemyWave() {
+
+    for(int i = 0; i < this->enemy_waves.size(); i++) {
+        
+        this->enemy_waves.at(i)->update();
+    }
+}
+void Player::renderEnemyWave() {
+
+    for(int i = 0; i < this->enemy_waves.size(); i++) {
+        
+        this->enemy_waves.at(i)->render();
+    }
+}
+
+//Enemy
+void Player::createEnemy(double x, double y) {
+
+    Enemy* enemy = new Enemy();
+    enemy->create();
+    enemy->setRenderWindow(this->getRenderWindow());
+    enemy->setPosition(x, y);
+
+    this->enemies.push_back(enemy);
+}
+void Player::updateEnemy() {
+
+    for(int i = 0; i < this->enemies.size(); i++) {
+
+        this->enemies.at(i)->update();
+    }
+}
+void Player::renderEnemy() {
+
+    for(int i = 0; i < this->enemies.size(); i++) {
+
+        this->enemies.at(i)->render();
+    }
+}
+void Player::deleteEnemy() {
+
 }
 
 //Movement
@@ -73,6 +151,10 @@ void Player::playerShootBullet() {
 }
 
 //Bullets
+std::vector <BulletPlayer*> Player::getBulletsPlayer() {
+
+    return this->bullets_player;
+}
 void Player::createBulletPlayer(double x, double y, double speed, int direction) {
 
     BulletPlayer* bullet = new BulletPlayer();
@@ -89,6 +171,20 @@ void Player::updateBulletPlayer() {
     for(int i = 0; i < this->bullets_player.size(); i++) {
 
         this->bullets_player.at(i)->update();
+        
+        //Do bullet hit enemies
+        for(int j = 0; j < this->enemies.size(); j++) {
+
+            //Collision
+            if(this->bullets_player.at(i)->x > this->enemies.at(j)->x - 32 && this->bullets_player.at(i)->x < this->enemies.at(j)->x + 32) {
+
+                if(this->bullets_player.at(i)->y > this->enemies.at(j)->y - 32 && this->bullets_player.at(i)->y < this->enemies.at(j)->y + 32) {
+
+                    this->enemies.at(j)->enemyHurt();
+                    this->bullets_player.erase(this->bullets_player.begin() + i);
+                }
+            } 
+        }
     }
 }
 void Player::renderBulletPlayer() {
@@ -143,5 +239,15 @@ void Player::deleteBulletEnemy() {
 
             this->bullets_enemy.erase(this->bullets_enemy.begin() + i);
         }
+    }
+}
+
+void Player::createBulletEnemyCircle(double x, double y, double speed, std::string type) {
+
+    double start_direction = (((this->y - y) / (this->x - x)) / M_PI) * 180;
+
+    int quality = 5; // 1-100%
+    for(int i = 0; i < (float)360 * (quality / (float)100); i++) {
+        this->createBulletEnemy(x, y, speed, start_direction + (float)i * ((float)100 / quality), type);
     }
 }

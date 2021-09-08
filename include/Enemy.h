@@ -3,28 +3,33 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <cmath>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 
-#include "include/Bullet.h"
+#include "include/Entity.h"
 #include "include/Randomize.h"
 
-class BulletEnemy : public Bullet {
+class Enemy : public Entity {
 
     private :
 
-        //Type
-        std::string bullet_type;
+        int flash;
+
+        double enemy_x_togo;
+        double enemy_y_togo;
+
+        double enemy_speed_h;
+        double enemy_speed_v;
 
     public :
 
-        //Accesssors
-        void setBulletType(std::string type);
-        std::string getBulletType(); 
+        //Movement
+        void setPositionTogo(double x, double y);
+
+        void enemyHurt();
 
         //Functions
         void create();

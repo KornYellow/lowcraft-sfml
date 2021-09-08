@@ -14,9 +14,9 @@ void Game::initRenderWindow() {
     this->video_mode.width = 1920;
     this->video_mode.height = 1080; 
 
-    this->render_window = new sf::RenderWindow(this->video_mode, "Rhythm Invader -- 1.0.0", sf::Style::Titlebar | sf::Style::Close | sf::Style::Fullscreen);
+    this->render_window = new sf::RenderWindow(this->video_mode, "Rhythm Invader -- 1.0.0", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
     this->render_window->setFramerateLimit(75);
-    this->render_window->setMouseCursorVisible(false);
+    //this->render_window->setMouseCursorVisible(false);
 }
 void Game::initPlayer() {
 

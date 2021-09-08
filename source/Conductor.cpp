@@ -14,14 +14,14 @@ Conductor::Conductor() {
     this->music_library->addMusic(
         "Creatures Ov Deception", "Just Shapes and Beats",
         190,
-        0.04,
+        0.08,
         "../resource/Music/just-shapes-and-beats--creatures-ov-deception.ogg"
     );
     this->music_library->addMusic(
         "La Danse Macabre",
         "Just Shovels and Knights",
         128,
-        -0.02,
+        0.04,
         "../resource/Music/just-shovels-and-knights--la-danse-macabre.ogg"
     );
 }
@@ -49,9 +49,10 @@ void Conductor::displayMusicStatus() {
 
         std::cout << "* ================================================================= *" << std::endl;
         std::cout << "| > Now playing : " << this->music_author << " - " << this->music_name << std::endl;
-        std::cout << "| > BPM : " << this->music_bpm << std::endl;
+        std::cout << "| > BPM : " << this->music_bpm << " (" << this->music_offset << ")" << std::endl;
         std::cout << "| > Music position : " << this->music.getPlayingOffset().asSeconds() << std::endl;
         std::cout << "| > Second per Beat : " << this->second_per_beat << std::endl;
+        std::cout << "| > Beat 1/4 Now : " << this->beat_1_4 << std::endl;
 
         int beat_show = ((this->beat_1_4 - 1) % 4);
         std::cout << "| > 1/4  ";
@@ -131,16 +132,43 @@ Player* Conductor::getPlayer() {
 void Conductor::update() {
     
     this->manageBeat();
-    this->displayMusicStatus();
+    //this->displayMusicStatus();
 }
 
 //Beat Action
 void Conductor::beatActionCreaturesOvDeception(int beat) {
+    
+    int window_width = this->player->getRenderWindow()->getSize().x;
 
-    if(beat % 4 == 0) {
+    if(beat % 4 == 0 && beat < 512) {
 
-        int window_width = this->player->getRenderWindow()->getSize().x;
         int random_x = Randomize::randomIntRange(0, window_width);
+        this->player->createBulletEnemy(random_x, 28, 7, 90, "Rectangle");
+
+        this->player->createBulletEnemyCircle(window_width/2, 64, 7, "Rectangle");
+    }
+    if(beat == 512) {
+
+        int enemy_size = 44;
+        int enemy_count_column = 12;
+        int enemy_count_row = 4;
+        int wave_gap = 25;
+
+        this->player->createEnemyWave(0, -((enemy_size + wave_gap) * enemy_count_row), enemy_count_column, enemy_count_row, wave_gap);
+        this->player->moveEnemyWave(0, (enemy_size + wave_gap) * enemy_count_row + enemy_size);
+        
+        this->player->createBulletEnemyCircle(window_width/2, 64, 7, "Rectangle");
+    }
+    if(beat % 8 == 0 && beat > 512) {
+
+        this->player->moveEnemyWave();
+    }
+    if(beat % 4 == 0 && beat >= 768) {
+
+        int random_x = Randomize::randomIntRange(0, window_width);
+        this->player->createBulletEnemy(random_x, 28, 7, 90, "Rectangle");
+
+        random_x = Randomize::randomIntRange(0, window_width);
         this->player->createBulletEnemy(random_x, 28, 7, 90, "Rectangle");
     }
 }

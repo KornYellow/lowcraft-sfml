@@ -21,6 +21,14 @@ Entity::~Entity() {
 }
 
 //Accessors
+int Entity::getSpriteWidth() {
+
+    return this->sprite_width;
+}
+int Entity::getSpriteHeight() {
+    
+    return this->sprite_height;
+}
 void Entity::setRenderWindow(sf::RenderWindow* render_window) {
 
     this->render_window = render_window;
@@ -31,15 +39,16 @@ sf::RenderWindow* Entity::getRenderWindow() {
 }
 void Entity::setSprite(std::string sprite_path) {
 
+    this->sprite = new sf::Sprite();
     this->texture.loadFromFile(sprite_path);
     this->sprite_width = this->texture.getSize().x;
     this->sprite_height = this->texture.getSize().y;
 
-    this->sprite.setTexture(this->texture);
-    this->sprite.setOrigin(sf::Vector2f(this->sprite_width / 2, this->sprite_height / 2));
-    this->sprite.setPosition(this->x, this->y);
+    this->sprite->setTexture(this->texture);
+    this->sprite->setOrigin(sf::Vector2f(this->sprite_width / 2, this->sprite_height / 2));
+    this->sprite->setPosition(this->x, this->y);
 }
-sf::Sprite Entity::getSprite() {
+sf::Sprite* Entity::getSprite() {
 
     return this->sprite;
 }
@@ -66,8 +75,8 @@ void Entity::render() {
 }
 void Entity::drawSelf() {
 
-    this->sprite.setPosition(this->x, this->y);
-    this->render_window->draw(this->sprite);
+    this->sprite->setPosition(this->x, this->y);
+    this->render_window->draw(*this->sprite);
 }
 
 //Keyboard and Mouse
@@ -108,6 +117,58 @@ bool Entity::mouseCheckPressed(sf::Mouse::Button key) {
 sf::Vector2f Entity::getMousePosition() {
 
     return (sf::Vector2f)sf::Mouse::getPosition(*this->render_window);
+}
+
+//Particles
+std::vector <Particle*> Entity::getParticles() {
+
+    return this->particles;
+}
+void Entity::createParticleCircle(double x, double y, int radius, int r, int g, int b, int target_r, int target_g, int target_b) {
+
+    ParticleCircle* particle = new ParticleCircle();
+    particle->setPosition(x, y);
+    particle->setRenderWindow(this->getRenderWindow());
+    particle->radius = radius;
+    particle->r = r;
+    particle->g = g;
+    particle->b = b;
+    particle->target_r = target_r;
+    particle->target_g = target_g;
+    particle->target_b = target_b;
+
+    this->particles.push_back(particle);
+}
+void Entity::setParticlePosition(double x, double y) {
+    
+    for(int i = 0; i < this->particles.size(); i++) {
+
+        this->particles.at(i)->setPosition(x, y);
+    }  
+}
+void Entity::updateParticle() {
+
+    for(int i = 0; i < this->particles.size(); i++) {
+
+        this->particles.at(i)->update();
+    }   
+}
+void Entity::renderParticle() {
+
+    for(int i = 0; i < this->particles.size(); i++) {
+
+        this->particles.at(i)->render();
+    } 
+}
+void Entity::deleteParticle() {
+
+    for(int i = 0; i < this->particles.size(); i++) {
+
+        if(this->particles.at(i)->alpha <= 0 || this->particles.at(i)->scale <= 0) {
+
+            this->particles.erase(this->particles.begin() + i);
+        }
+    } 
 }
 
 //Bounding Box
