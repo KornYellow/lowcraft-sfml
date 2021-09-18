@@ -14,6 +14,10 @@ void Player::create() {
 }
 void Player::update() {
     
+    //Particle
+    this->updateParticle();
+    this->deleteParticle();
+
     //Player
     this->playerFollowMouse();
     this->playerShootBullet();
@@ -32,6 +36,9 @@ void Player::update() {
     this->updateEnemy();
 }
 void Player::render() {
+
+    //Particle
+    this->renderParticle();
 
     //Bullets
     this->renderBulletEnemy();
@@ -242,11 +249,9 @@ void Player::deleteBulletEnemy() {
     }
 }
 
-void Player::createBulletEnemyCircle(double x, double y, double speed, std::string type) {
+void Player::createBulletEnemyCircle(double x, double y, double speed, int quality, std::string type) {
 
-    double start_direction = (((this->y - y) / (this->x - x)) / M_PI) * 180;
-
-    int quality = 5; // 1-100%
+    double start_direction = atan2((this->y - y), (this->x - x)) * (180 / M_PI);
     for(int i = 0; i < (float)360 * (quality / (float)100); i++) {
         this->createBulletEnemy(x, y, speed, start_direction + (float)i * ((float)100 / quality), type);
     }

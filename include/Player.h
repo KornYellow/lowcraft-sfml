@@ -68,7 +68,7 @@ class Player : public Entity {
         void renderBulletEnemy();
         void deleteBulletEnemy();
 
-        void createBulletEnemyCircle(double x, double y, double speed, std::string type);
+        void createBulletEnemyCircle(double x, double y, double speed, int quality, std::string type);
 
         //Functions
         void create();
