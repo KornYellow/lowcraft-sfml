@@ -41,7 +41,6 @@ void Conductor::playMusic(std::string music_name) {
     
     if(!this->music.openFromFile(this->music_path)) abort();
     this->music.play();
-    this->music.setVolume(1);
     this->calculateBeat();
 }
 void Conductor::displayMusicStatus() {
@@ -133,7 +132,7 @@ Player* Conductor::getPlayer() {
 void Conductor::update() {
     
     this->manageBeat();
-    //this->displayMusicStatus();
+    this->displayMusicStatus();
 }
 
 //Beat Action
@@ -144,9 +143,18 @@ void Conductor::beatActionCreaturesOvDeception(int beat) {
     if(beat % 4 == 0 && beat < 512) {
 
         int random_x = Randomize::randomIntRange(0, window_width);
-        this->player->createBulletEnemy(random_x, 28, 7, 90, "Rectangle");
+        this->player->createBulletEnemy(random_x, 28, 10, 90, "Rectangle");
 
-        this->player->createBulletEnemyCircle(window_width/2, 64, 7, 10, "Rectangle");
+        if(beat % 16 == 0 && beat >= 256 && beat <= 480) {
+            
+            int random_x = Randomize::randomIntRange(0, window_width);
+            this->player->createBulletEnemy(random_x, 28, 6, 90, "Rectangle Huge");
+        }
+        if(beat % 32 == 12 && beat >= 256 && beat <= 480) {
+
+            int random_x = Randomize::randomIntRange(0, window_width);
+            this->player->createBulletEnemy(random_x, 28, 6, 90, "Rectangle Huge");
+        }
     }
     if(beat == 512) {
 
@@ -158,9 +166,9 @@ void Conductor::beatActionCreaturesOvDeception(int beat) {
         this->player->createEnemyWave(0, -((enemy_size + wave_gap) * enemy_count_row), enemy_count_column, enemy_count_row, wave_gap);
         this->player->moveEnemyWave(0, (enemy_size + wave_gap) * enemy_count_row + enemy_size);
         
-        this->player->createBulletEnemyCircle(window_width/2, 64, 7, 10, "Rectangle");
-        this->player->createBulletEnemyCircle(window_width/2, 64, 8, 10, "Rectangle");
-        this->player->createBulletEnemyCircle(window_width/2, 64, 9, 10, "Rectangle");
+        this->player->createBulletEnemyCircle(window_width/2, 64, 5, 4, "Rectangle Small");
+        this->player->createBulletEnemyCircle(window_width/2, 64, 5.5, 5, "Rectangle Small");
+        this->player->createBulletEnemyCircle(window_width/2, 64, 6, 6, "Rectangle Small");
     }
     if(beat % 8 == 0 && beat > 512) {
 
@@ -168,20 +176,14 @@ void Conductor::beatActionCreaturesOvDeception(int beat) {
     }
     if(beat % 4 == 0 && beat >= 768) {
 
-        int random_x = Randomize::randomIntRange(0, window_width);
-        this->player->createBulletEnemy(random_x, 28, 7, 90, "Rectangle");
-
-        random_x = Randomize::randomIntRange(0, window_width);
-        this->player->createBulletEnemy(random_x, 28, 7, 90, "Rectangle");
-
         if(beat % 16 == 0) {
-            this->player->createBulletEnemyCircle(window_width/2, 64, 7, 5, "Rectangle");
-
-            this->player->createParticleCircle(window_width / 2, -8, 255, 255, 255, 255, 255, 85, 85);
+            int random_x = Randomize::randomIntRange(0, window_width);
+            this->player->createBulletEnemy(random_x, 28, 8, 90, "Rectangle Huge");
         }
-        else if(beat % 16 == 8) {
-            this->player->createBulletEnemyCircle(window_width, 64, 7, 5, "Rectangle");
-            this->player->createBulletEnemyCircle(0, 64, 7, 5, "Rectangle");
+    
+        if(beat % 16 == 8) {
+            this->player->createBulletEnemyCircle(window_width, 64, 7, 3, "Rectangle");
+            this->player->createBulletEnemyCircle(0, 64, 7, 3, "Rectangle");
 
             this->player->createParticleCircle(window_width, -8, 255, 255, 255, 255, 255, 85, 85);
             this->player->createParticleCircle(0, -8, 255, 255, 255, 255, 255, 85, 85);

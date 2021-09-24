@@ -27,7 +27,7 @@ Music* MusicLibrary::getMusic(std::string music_name) {
     
     if(is_found == -1) {
 
-        std::cout << "error: cannot find music \'" << music_name << "\' in the library." << std::endl;
+        std::cout << "ERROR: cannot find music \'" << music_name << "\' in the library." << std::endl;
         abort();
     }
     return this->musics.at(is_found);

@@ -177,7 +177,7 @@ bool Entity::isOutOfRenderWindow() {
     int window_x = this->render_window->getSize().x;
     int window_y = this->render_window->getSize().y;
 
-    if(this->x < -this->sprite_width || this->x > window_x + this->sprite_width) return true;
-    if(this->y < -this->sprite_height || this->y > window_y + this->sprite_height) return true;
+    if(this->x < -this->sprite_width*2 || this->x > window_x + this->sprite_width*2) return true;
+    if(this->y < -this->sprite_height*2 || this->y > window_y + this->sprite_height*2) return true;
     return false;
 }
