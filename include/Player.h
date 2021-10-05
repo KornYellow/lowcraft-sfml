@@ -28,6 +28,8 @@ class Player : public Entity {
         double player_shoot_delay;
         double player_shoot_firerate;
 
+        int player_invincible_delay;
+
         //Enemies
         std::vector <EnemyWave*> enemy_waves;
         std::vector <Enemy*> enemies;
@@ -40,6 +42,10 @@ class Player : public Entity {
         void playerMovement(double player_speed);
         void playerFollowMouse();
         void playerShootBullet();
+
+        //Taking Damage
+        void playerTakingDamage();
+        void playerInvincible();
 
     public :
 

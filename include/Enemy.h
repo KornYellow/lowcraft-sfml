@@ -17,6 +17,8 @@ class Enemy : public Entity {
     private :
 
         int flash;
+        int health;
+        bool is_dead;
 
         double enemy_x_togo;
         double enemy_y_togo;
@@ -26,9 +28,16 @@ class Enemy : public Entity {
 
     public :
 
+        //Accessor
+        void setEnemyHealth(int health);
+        int getEnemyHealth();
+        void setIsDead(bool is_dead);
+        bool getIsDead();
+
         //Movement
         void setPositionTogo(double x, double y);
 
+        //Enemy Hurt
         void enemyHurt();
 
         //Functions

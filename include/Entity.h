@@ -27,6 +27,7 @@ class Entity {
         sf::Texture texture;
         int sprite_width;
         int sprite_height;
+        double sprite_alpha;
 
         //Keyboard and Mouse
         std::vector <int> is_key_pressed;
@@ -58,6 +59,9 @@ class Entity {
 
         void setPosition(double x, double y);
         sf::Vector2f getPosition();
+
+        void setAlpha(double alpha);
+        double getAlpha();
 
         //Functions
         virtual void create();

@@ -59,6 +59,7 @@ void EnemyWave::update() {
 
     //Enemy
     this->updateEnemy();
+    this->deleteEnemy();
 }
 void EnemyWave::render() {
 
@@ -151,6 +152,9 @@ void EnemyWave::updateEnemy() {
         //Do bullet hit enemies
         for(int j = 0; j < this->player->getBulletsPlayer().size(); j++) {
 
+            //Check if enemies already dead
+            if(this->enemies.at(i)->getIsDead()) continue;
+
             //Collision
             if(this->player->getBulletsPlayer().at(j)->x > this->enemies.at(i)->x - 32 && this->player->getBulletsPlayer().at(j)->x < this->enemies.at(i)->x + 32) {
 
@@ -169,30 +173,14 @@ void EnemyWave::renderEnemy() {
 
         this->enemies.at(i)->render();
     }
-
-    //Debug
-    /*
-    sf::RectangleShape line;
-    line.setSize(sf::Vector2f(2, 1080));
-    line.setOrigin(sf::Vector2f(1, 0));
-    line.setFillColor(sf::Color::White);
-
-    line.setPosition(this->wave_border_left, 0);
-    this->getRenderWindow()->draw(line);
-
-    line.setPosition(this->wave_border_right, 0);
-    this->getRenderWindow()->draw(line);
-    
-    line.setPosition(this->wave_border_max_left, 0);
-    this->getRenderWindow()->draw(line);
-
-    line.setPosition(this->wave_border_max_right, 0);
-    this->getRenderWindow()->draw(line);
-
-    line.setPosition(this->getRenderWindow()->getSize().x / 2, 0);
-    this->getRenderWindow()->draw(line);
-    */
 }
 void EnemyWave::deleteEnemy() {
 
+    for(int i = 0; i < this->enemies.size(); i++) {
+
+        if(this->enemies.at(i)->getEnemyHealth() <= 0) {
+
+            this->enemies.at(i)->setIsDead(true);
+        }
+    }
 }

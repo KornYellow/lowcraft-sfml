@@ -30,8 +30,8 @@ void Game::initConductor() {
     this->conductor->setPlayer(this->player);
     
     //Choose music
-    //this->conductor->playMusic("Creatures Ov Deception");
-    this->conductor->playMusic("La Danse Macabre");
+    this->conductor->playMusic("Creatures Ov Deception");
+    //this->conductor->playMusic("La Danse Macabre");
 }
 
 //Constructor and Destructor

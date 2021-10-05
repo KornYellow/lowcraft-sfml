@@ -10,6 +10,8 @@ void Player::create() {
     this->player_shoot_delay = 0;
     this->player_shoot_firerate = 5;
 
+    this->player_invincible_delay = 0;
+
     this->setSprite("../resource/Player.png");
 }
 void Player::update() {
@@ -19,6 +21,7 @@ void Player::update() {
     this->deleteParticle();
 
     //Player
+    this->playerTakingDamage();
     this->playerFollowMouse();
     this->playerShootBullet();
 
@@ -49,6 +52,7 @@ void Player::render() {
     this->renderEnemy();
 
     //Player
+    this->playerInvincible();
     this->drawSelf();
 }
 
@@ -157,6 +161,48 @@ void Player::playerShootBullet() {
     else this->player_shoot_delay --;
 }
 
+//Taking Damage
+void Player::playerTakingDamage() {
+
+    //Taking damage from bullets enemy
+    for(int i = 0; i < bullets_enemy.size(); i++) {
+
+        int bullet_x = bullets_enemy.at(i)->x;
+        int bullet_y = bullets_enemy.at(i)->y;
+        int bullet_size = bullets_enemy.at(i)->getSpriteWidth();
+
+        //Check if player is in enemy
+        if(this->x > bullet_x - (bullet_size / 2) && 
+           this->x < bullet_x + (bullet_size / 2) &&
+           this->y > bullet_y - (bullet_size / 2) &&
+           this->y < bullet_y + (bullet_size / 2)) {
+            
+            if(this->player_invincible_delay <= 0) {
+                
+                bullets_enemy.erase(bullets_enemy.begin() + i);
+                this->player_invincible_delay = 180;
+            }
+        }
+    }
+}
+void Player::playerInvincible() {
+
+    if(this->player_invincible_delay > 0) {
+
+        this->player_invincible_delay --;
+        std::cout << this->player_invincible_delay << std::endl;
+        
+        if(this->player_invincible_delay % 20 < 10) {
+
+            this->setAlpha(1);
+        }
+        else {
+
+            this->setAlpha(0.5);
+        }
+    }
+}
+
 //Bullets
 std::vector <BulletPlayer*> Player::getBulletsPlayer() {
 
@@ -181,12 +227,15 @@ void Player::updateBulletPlayer() {
         
         //Do bullet hit enemies
         for(int j = 0; j < this->enemies.size(); j++) {
+            
+            //Check if enemies already dead
+            if(this->enemies.at(j)->getIsDead()) continue;
 
             //Collision
             if(this->bullets_player.at(i)->x > this->enemies.at(j)->x - 32 && this->bullets_player.at(i)->x < this->enemies.at(j)->x + 32) {
 
                 if(this->bullets_player.at(i)->y > this->enemies.at(j)->y - 32 && this->bullets_player.at(i)->y < this->enemies.at(j)->y + 32) {
-
+                    
                     this->enemies.at(j)->enemyHurt();
                     this->bullets_player.erase(this->bullets_player.begin() + i);
                 }

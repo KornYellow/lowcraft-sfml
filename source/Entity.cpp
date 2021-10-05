@@ -61,6 +61,15 @@ sf::Vector2f Entity::getPosition() {
     
     return sf::Vector2f(this->x, this->y);
 }
+void Entity::setAlpha(double alpha) {
+    
+    this->sprite->setColor(sf::Color(255, 255, 255, this->sprite_alpha * 255));
+    this->sprite_alpha = alpha;
+}
+double Entity::getAlpha() {
+
+    return this->sprite_alpha;
+}
 
 //Functions
 void Entity::create() {
@@ -177,7 +186,15 @@ bool Entity::isOutOfRenderWindow() {
     int window_x = this->render_window->getSize().x;
     int window_y = this->render_window->getSize().y;
 
-    if(this->x < -this->sprite_width*2 || this->x > window_x + this->sprite_width*2) return true;
-    if(this->y < -this->sprite_height*2 || this->y > window_y + this->sprite_height*2) return true;
+    if(this->x < -this->sprite_width*2 || 
+       this->x > window_x + this->sprite_width*2) {
+        return true;
+    }
+    
+    if(this->y < -this->sprite_height*2 || 
+       this->y > window_y + this->sprite_height*2) {
+        return true;
+    }
+    
     return false;
 }
